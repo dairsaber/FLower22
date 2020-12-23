@@ -2,6 +2,7 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import {NavigationContainer, RouteProp} from '@react-navigation/native';
+import GridScreen from '@/screens/Grid';
 import {
   createStackNavigator,
   StackNavigationProp,
@@ -11,8 +12,12 @@ import {TextInput} from 'react-native-gesture-handler';
 export type ParamsList = {
   Home: undefined;
   User: {name?: string; setName: Function};
+  Grid: undefined;
 };
 
+interface GridProp {
+  navigation: StackNavigationProp<ParamsList, 'Grid'>;
+}
 interface HomeProp {
   navigation: StackNavigationProp<ParamsList, 'Home'>;
 }
@@ -34,6 +39,12 @@ function HomeScreen(props: HomeProp) {
           navigation.navigate('User', {setName, name});
         }}
         title="edit"
+      />
+      <Button
+        onPress={() => {
+          navigation.navigate('Grid');
+        }}
+        title="Grid"
       />
     </View>
   );
@@ -70,6 +81,7 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="User" component={UserScreen} />
+        <Stack.Screen name="Grid" component={GridScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
