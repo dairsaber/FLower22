@@ -3,6 +3,7 @@ import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import {NavigationContainer, RouteProp} from '@react-navigation/native';
 import GridScreen from '@/screens/Grid';
+import SeatSelectScreen from '@/screens/SeatSelect';
 import {
   createStackNavigator,
   StackNavigationProp,
@@ -13,11 +14,9 @@ export type ParamsList = {
   Home: undefined;
   User: {name?: string; setName: Function};
   Grid: undefined;
+  SeatSelect: undefined;
 };
 
-interface GridProp {
-  navigation: StackNavigationProp<ParamsList, 'Grid'>;
-}
 interface HomeProp {
   navigation: StackNavigationProp<ParamsList, 'Home'>;
 }
@@ -45,6 +44,12 @@ function HomeScreen(props: HomeProp) {
           navigation.navigate('Grid');
         }}
         title="Grid"
+      />
+      <Button
+        onPress={() => {
+          navigation.navigate('SeatSelect');
+        }}
+        title="SeatSelect"
       />
     </View>
   );
@@ -82,6 +87,7 @@ function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="User" component={UserScreen} />
         <Stack.Screen name="Grid" component={GridScreen} />
+        <Stack.Screen name="SeatSelect" component={SeatSelectScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
